@@ -14,16 +14,19 @@ jobs:
       - name: Code Checkout
         run: echo "Code checkout from GitHub"
   build:
+    needs: [code]
     runs-on: ubuntu-slim
     steps:
       - name: Code Build using Docker
         run: echo "Building using Docker build"
   test:
+    needs: [build]
     runs-on: ubuntu-slim
     steps:
       - name: Code is Tested
         run: echo "Testing the docker container"
   deploy:
+    needs: [code, build, test]
     runs-on: ubuntu-slim
     steps:
       - name: Deploying the Code
