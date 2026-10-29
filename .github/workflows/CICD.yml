@@ -36,6 +36,7 @@ jobs:
       - name: Code is Tested
         run: echo "Testing the docker container"
   deploy:
+    if: inputs.environments=='dev'
     needs: [code, build, test]
     runs-on: ubuntu-slim
     steps:
