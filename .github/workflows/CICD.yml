@@ -30,4 +30,4 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - name: Deploying the Code
-        run: echo "deployed the code using docker compose"
+        run: echo "deployed the code using docker compose concept"
