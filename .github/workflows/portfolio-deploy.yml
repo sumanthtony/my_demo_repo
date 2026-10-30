@@ -1,0 +1,40 @@
+name: My-Portfolio
+
+on:
+  workflow_dispatch: 
+    inputs:
+      environments:
+        description: Deploying static website hosting on GitHub Pages
+        default: dev
+        type: choice
+        required: true
+        options:
+          - dev
+          - stag
+          - prod
+          
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v6
+
+        # Setup GitHub Pages
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+          
+        # Static Code Artifacts
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
