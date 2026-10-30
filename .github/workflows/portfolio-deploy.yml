@@ -21,7 +21,13 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
+    
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
     steps:
       - name: Code checkout
         uses: actions/checkout@v6
@@ -37,4 +43,5 @@ jobs:
           path: "."
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
